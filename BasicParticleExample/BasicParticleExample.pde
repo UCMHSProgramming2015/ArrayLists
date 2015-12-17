@@ -7,22 +7,22 @@ ArrayList<Particle> particles = new ArrayList<Particle>();    //declare and init
 void setup() {
   size(1200, 800);
   colorMode(HSB, 360, 100, 100, 100);
-  particles.add(new Particle(mouseX, mouseY));
+  particles.add(new Particle(mouseX, mouseY));    //add a new Particle to the particles ArrayList
 }
 
 void draw() {
   println(particles.size());
   background(0, 0, 100);
-  particles.add(new Particle(mouseX, mouseY));
+  particles.add(new Particle(mouseX, mouseY));    //add a new Particle to the particles ArrayList
 
-  for (int i = 0; i < particles.size(); i++) {
+  for (int i = particles.size()-1; i >= 0; i--) {  //go through the ArrayList backwards to prevent flickering
     //particles.get(0)   will get the particle at index 0 from the ArrayList
     //to use this Particle, we have to store it in another Particle object
-    Particle p = particles.get(i);
-    p.display();
-    p.fall();
-    if (p.isDead()) {
-      p.rebirth(mouseX, mouseY);
+    Particle p = particles.get(i);    //get the Particle in location i and store it in Particle p
+    p.display();                      //display p
+    p.fall();                         //make p fall
+    if (p.isDead()) {                 //if p is dead...
+      particles.remove(i);    //remove particle at location i
     }
   }
 }
